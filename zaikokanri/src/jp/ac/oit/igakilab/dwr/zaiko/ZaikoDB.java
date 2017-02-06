@@ -92,8 +92,17 @@ public class ZaikoDB {
 	 */
 	public boolean issueItem(String itemName, int amount){
 		//TODO: DBに出庫を記録する機能の実装
+        int nowQty = getItemQuantity(itemName);
 
-		return false;
+        if( nowQty >= amount ){
+            Document doc = new Document("name", itemName)
+                .append("amount", -amount)
+                .append("time", Calendar.getInstance().getTime());
+            getCollection().insertOne(doc);
+            return true;
+        }else{
+            return false;
+        }
 	}
 
 	/**
