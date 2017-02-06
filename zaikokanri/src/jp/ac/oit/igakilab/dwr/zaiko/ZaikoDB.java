@@ -1,6 +1,7 @@
 package jp.ac.oit.igakilab.dwr.zaiko;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import org.bson.Document;
@@ -55,6 +56,8 @@ public class ZaikoDB {
 		return doc != null ? doc.getInteger("qty", 0) : 0;
 	}
 
+
+
 	/**
 	 * DBに登録されている商品の残りの在庫数を取得します
 	 * @return DBカーソル
@@ -72,6 +75,11 @@ public class ZaikoDB {
 	 */
 	public void receiveItem(String itemName, int amount){
 		//TODO: DBに入庫を記録する機能の実装
+		Document doc = new Document("name", itemName)
+	            .append("amount", amount)
+	            .append("time", Calendar.getInstance().getTime());
+
+	        getCollection().insertOne(doc);
 	}
 
 	/**

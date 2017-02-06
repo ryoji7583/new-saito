@@ -42,8 +42,12 @@ public class Zaiko {
 	 */
 	public boolean receiveItem(ItemForm recv){
 		//TODO: 入庫メソッドの実装
+		ZaikoDB db = new ZaikoDB();
 
-		return true;
+        db.receiveItem(recv.getName(), recv.getAmount());
+
+        db.closeClient();
+        return true;
 	}
 
 	/**
