@@ -14,6 +14,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
 
 /**
  * DBにアクセスするためのクラスです
@@ -55,7 +56,6 @@ public class ZaikoDB {
 
 		return doc != null ? doc.getInteger("qty", 0) : 0;
 	}
-
 
 
 	/**
@@ -104,8 +104,9 @@ public class ZaikoDB {
 	 */
 	public FindIterable<Document> getItemReceipts(String itemName){
 		//TODO: DBから入出荷の履歴を取得する機能を実装
-
-		return null;
+	        return getCollection()
+	            .find(Filters.eq("name", itemName))
+	            .sort(Sorts.ascending("time"));
 	}
 
 	/**
