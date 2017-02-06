@@ -51,8 +51,12 @@ public class Zaiko {
 	 */
 	public boolean issueItem(ItemForm req){
 		//TODO: 出庫メソッドの実装
+        ZaikoDB db = new ZaikoDB();
 
-		return true;
+        boolean res = db.issueItem(req.getName(), req.getAmount());
+
+        db.closeClient();
+        return res;
 	}
 
 	/**

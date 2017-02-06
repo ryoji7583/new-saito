@@ -33,10 +33,22 @@ function reloadList(){
             //商品名にリンクを追加する
             $list.append($("<tr></tr>").append(
                 $("<td></td>").append($("<a></a>").text(reply[i].name)
-                        .attr("href", "history.html?item=" + reply[i].name)), 
+                        .attr("href", "history.html?item=" + reply[i].name)),
                 $("<td></td>").text(reply[i].amount),
                 $("<td></td>").append($inputAmount, $exbtn)
             ));
+        }
+    });
+}
+
+//syukka関数追加
+function syukka(name, amount){
+    Zaiko.issueItem({name, amount}, function(reply){
+        if( reply ){
+            alert(name + "を" + amount + "個出荷しました");
+            reloadList();
+        }else{
+            alert("在庫が足りません");
         }
     });
 }
