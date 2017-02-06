@@ -21,7 +21,6 @@ function reloadList(){
         $list.append("<tr><th>商品名</th><th>個数</th><th>出荷</th></tr>");
 
         for(var i=0; i<reply.length; i++){
-        　　//個数入力部・出荷ボタン
             var $inputAmount = $("<input></input>").attr("type", "text");
             var $exbtn = $("<button></button>").text("出荷");
 
@@ -31,10 +30,12 @@ function reloadList(){
             });
 
             //表に追加
+            //商品名にリンクを追加する
             $list.append($("<tr></tr>").append(
-                $("<td></td>").text(reply[i].name),
+                $("<td></td>").append($("<a></a>").text(reply[i].name)
+                        .attr("href", "history.html?item=" + reply[i].name)),
                 $("<td></td>").text(reply[i].amount),
-                $("<td></td>").append($inputAmount, $exbtn)　//個数入力・出荷ボタンを表に追加
+                $("<td></td>").append($inputAmount, $exbtn)
             ));
         }
     });
