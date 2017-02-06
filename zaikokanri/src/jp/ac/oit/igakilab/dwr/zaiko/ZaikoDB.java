@@ -64,8 +64,9 @@ public class ZaikoDB {
 	 */
 	public AggregateIterable<Document> getItemList(){
 		//TODO: 在庫数のリストを取得する機能の実装
-
-		return null;
+		//入荷/出荷データの合計を計算する
+        return getCollection().aggregate(Arrays.asList(
+            Aggregates.group("$name", Accumulators.sum("qty", "$amount"))));
 	}
 
 	/**
